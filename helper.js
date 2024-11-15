@@ -1,12 +1,13 @@
+
 const getDate = (dateString) => {
-    const timestamp = Date.parse(dateString)
-    if(isNaN(timestamp)) {
+    const date = isNaN(dateString) ? new Date(dateString) : new Date(+dateString);
+    if(isNaN(date)) {
         return { error : "Invalid Date" };
     }
 
     return {
-        unix: timestamp,
-        utc: new Date(dateString)
+        unix: Date.parse(date),
+        utc: date.toUTCString()
     };
 }
 

@@ -19,13 +19,20 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/api/", function (req, res) {
-  
-  res.json({response: "test"});
+app.get("/api/", function(req, res) {
+  const now = Date.now();
+  res.json({
+    unix: now,
+    utc: new Date(now).toUTCString()
+});
 });
 
+
 app.get("/api/:date", function (req, res) {
-  const response = getDate(req.params['date']);
+  const param = req.params['date'];
+  console.log('param', param);
+  const response = getDate(param);
+  console.log('api response', response);
   res.json(response);
 });
 
